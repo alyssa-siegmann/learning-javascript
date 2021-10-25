@@ -4,9 +4,9 @@ const maxModule = require('./max')
 // all of these declare variables, but with different scope
 // 
 
-// wrtie a program that prints out the max number in the array
+// // wrtie a program that prints out the max number in the array
 var a = [1,2,22,3,4,142,5,6,88,7,8,9]
-//var a = []
+// //var a = []
 
 // function max (z) {
 //     if (z.length = 0) {NaN;} 

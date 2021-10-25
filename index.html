@@ -1,29 +1,8 @@
 <html>
-  <head>
-  </head>
-  <style>
-    .div-1 {
-        background-color: green;
-    }
-</style>
-
+  <head>  </head>
   <body>
-    <b>Hello, </b> </i>World!</i>
+    <b>Hello, </b> World!
+    <script src="div-creator.js"></script>
   </body>
 
-  <script>
-    // By the way, every single one of these four lines is a side-effect
-    console.log("Hello, World!")
-    for (let i = 0; i < 10; i++) {
-      let d = document.createElement("div")
-      document.body.append(d)
-      d.innerText = i
-      let str = 'color: white; background-color: #';
-        for (let x = 0; x < 6; x++) {
-        str += i;
-        }
-      d.style = str
-    }
-    
-  </script>
 </html>
