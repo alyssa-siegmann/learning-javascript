@@ -1,8 +1,60 @@
 <html>
-  <head>  </head>
+  <head>
+    <style>
+
+      html {
+        font-family: sans-serif;
+      }
+
+      .cool {
+        color: rgb(21, 0, 255);
+        border-color: black;
+        border-width: 1px;
+        border-style: dotted;
+      }
+  
+      .whitedOut {
+        color: black !important;
+        background-color: white !important;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        background: rgb(177, 177, 177);
+        height: 50px;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      button {
+        background-color: lightskyblue;
+        color:rgb(21, 0, 255);
+      }
+
+      section {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      div {
+        padding: 10px;
+        width: 45%;
+      }
+
+    </style>
+  </head>
   <body>
-    <b>Hello, </b> World!
-    <script src="div-creator.js"></script>
+    <header>
+      <b>Hello, <span class=cool>World!</span> </b>
+      <button onclick="addADiv()">Add a div</button>
+      <script src="div-creator.js"></script>
+    </header>
+    <section id="sectionA">
+
+    </section>
   </body>
 
 </html>
+<!-- source of help for how to reference a source file in HTML: https://webplatform.github.io/docs/tutorials/your_first_look_at_javascript/ -->
