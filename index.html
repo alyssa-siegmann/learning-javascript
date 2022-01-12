@@ -1,7 +1,7 @@
 <html>
   <head>
     <style>
-      div {
+      .cell {
         border: black;
         border-width: 2px;
         border-style: solid;
@@ -9,11 +9,17 @@
         margin: 2px;
       }
 
-      section {
+      /* section {
+      } */
+
+      .row {
         display: flex;
-        flex-wrap: wrap;
-        /* padding-top: 100%; */
+        flex-wrap: nowrap;
+        flex-direction: row;
       }
+
+      section#sectionA { background: rgb(255, 68, 0) }
+      #sectionB { background: yellow }
 
       .dead {
         background-color: white;
@@ -23,15 +29,21 @@
         background-color: green;
       }
 
+      #sectionA .dead { background: grey; }
+
     </style>
   </head>
   <body>
     <section id="sectionA">
-      <script src="life-grid.js"></script>
     </section>
-    <section id="alivenum">
+    <section id="sectionB">
     </section>
-    <section id="deadnum">
-    </section>
+    <!-- <section id="alivenum"> -->
+    <!-- </section> -->
+    <!-- <section id="deadnum"> -->
+    <!-- </section> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> one way to include a library = url source above your own script -->
+    <!-- <script src="life-grid.js"></script> -->
+    <script src="bundle.js"></script>
   </body>
 </html>
