@@ -23,78 +23,68 @@
 
 // button.onclick()
 
-// don't forget to `run npx esbuild life-grid.js --outfile=bundle.js --bundle` before testing in browser
+// syntax notes on OR/falsy
+// function f(x, y) {
+//   console.log("x = ", x)
+//   console.log("y = ", y)
+//   console.log("coerced y = ", y || 42)  // if y != undefined then y else 42
+//   console.log("coerced y = ", (y === undefined) ? 42 : y)  // if y == undefined then 42 else y
+//   console.log("coerced y = ", y ?? 42)  // if y == undefined then 42 else y
+// }
+
+// f(42, 5)
+// f("foo", "bar")
+// f("foo")
+
+// don't forget to `run npx esbuild life-grid.js --outfile=bundle.js --bundle --watch` before testing in browser
 const $ = require('jquery')
 
-let btn = document.createElement("button");
-btn.innerHTML = "Add a grid!";
-document.body.appendChild(btn);
+$("<button>")
+  .appendTo(document.body)
+  .text("Click me!")
+  //.onclick(createGrid)
 
-createGrid(5, 5, sectionA)
-createGrid(3, 2, sectionB)
+createGrid(5, 5)
+createGrid(3, 2)
 
 
-//numAlive()
 
-//$("<div style='background: blue; padding: 10em'>").appendTo(document.body)
-
-function createGrid(mRow, nCol, container) {
+function createGrid(mRow, nCol) {
+  let container = $("<section>")
+    .appendTo(document.body)
   for (let i = 0; i < mRow; i++) {
+    
     let r = $("<div>")
       .addClass("row")
       .appendTo(container)
-      //let r = document.createElement("div") // <-- JS DO THIS MYSELF
-      //r.className = "row"
-      //container.append(r) <-- JS
-      //$(container).append(r) // <-- JQuery
-      for (let k = 0; k < nCol; k++) {
-        // let d = document.createElement("div") // <-- JS
-        // "ternary"
-        // let x = 5 + 6
-        // console.log(x == 11 ? "yes" : "no")
-
-        // if (k % 2 == 0) {
-        //     $(d).addClass("alive")
-        // } else {
-        //     $(d).addClass("dead")
-        // }
-        // d.onclick = function() { kill(d) } // <-- JS
-        $("<div>")
-          .addClass("cell")
-          .addClass(k % 2 == 0 ? "alive" : "dead")
-          .on("click", function() { kill(this) }) // jquery objects can contain multiple elements (work like arrays) so you index to get the individual elemet
-          .appendTo(r)
-      }
+    
+    for (let k = 0; k < nCol; k++) {
+    
+      $("<div>")
+        .addClass("cell")
+        .addClass(k % 2 == 0 ? "alive" : "dead")
+        .on("click", function() { kill(this, container) }) // jquery objects can contain multiple elements (work like arrays) so you index to get the individual elemet
+        .appendTo(r)
     }
-    $("<div>")
-      .addClass('alivenum')
-      .text("# of Alive Cells: " + $(this.section + ' .alive').length)
-      .appendTo(container)
-    $("<div>")
-      .addClass('deadnum')
-      .text("# of Dead Cells: " + $('.dead').length)
-      .appendTo(container)
   }
 
-function kill(x) {
-    // if (x.className == "cell alive") { // this is fragile because we depend on the particular order and we don't really care about .cell but we have to include it for comparison
-    //   x.className = "cell dead";
-    //   numAlive();    
-    // } else {
-    //   x.className = "cell alive";
-    //   numAlive();
-    // }
-    // if ($(x).is(".alive")) { 
-    //   $(x).addClass("dead").removeClass("alive")
-    // } else {
-    //   $(x).addClass("alive").removeClass("dead")
-    // }
+  $("<div>")
+    .addClass('alivenum')
+    .appendTo(container)
+
+  $("<div>")
+    .addClass('deadnum')
+    .appendTo(container)
+
+  numAlive(container)
+}
+
+function kill(x, y) {
     $(x).toggleClass("alive").toggleClass("dead")
-    numAlive(x)
+    numAlive(y)
   }
 
-function numAlive(x) {
-    // document.getElementById("alivenum").innerHTML = "# of Alive Cells: " + document.querySelectorAll('.alive').length;
-    $(".alivenum").text("# of Alive Cells: " + $('.alive').length);
-    $(".deadnum").text("# of Dead Cells: " + $('.dead').length);
+function numAlive(y) {
+    $(y).find(".alivenum").text("# of Alive Cells: " + $(y).find('.alive').length)
+    $(y).find(".deadnum").text("# of Dead Cells: " + $(y).find('.dead').length)
 }
