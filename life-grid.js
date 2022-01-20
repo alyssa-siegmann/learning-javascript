@@ -1,58 +1,18 @@
-// // Learning the dangers of THIS
-// let button = { title: "I'm a button!", x: 77}
-
-// let someObj = {
-//   x: 42,
-
-//   attachToButton: function() {
-//     console.log("my x is " + this.x)
-//     button.onclick = () => {
-//       console.log("my x is still " + this.x)
-//       console.log("and my this is ", this)
-//     }
-//   }
-// }
-
-// let f = x => x + 5
-// // let f = function(x) { return x + 5 }
-// console.log(f(37))
-
-// a handler is a method that gets called when an event happens
-
-// someObj.attachToButton()
-
-// button.onclick()
-
-// syntax notes on OR/falsy
-// function f(x, y) {
-//   console.log("x = ", x)
-//   console.log("y = ", y)
-//   console.log("coerced y = ", y || 42)  // if y != undefined then y else 42
-//   console.log("coerced y = ", (y === undefined) ? 42 : y)  // if y == undefined then 42 else y
-//   console.log("coerced y = ", y ?? 42)  // if y == undefined then 42 else y
-// }
-
-// f(42, 5)
-// f("foo", "bar")
-// f("foo")
-
-// don't forget to `run npx esbuild life-grid.js --outfile=bundle.js --bundle --watch` before testing in browser
+// don't forget to run `npx esbuild life-grid.js --outfile=bundle.js --bundle --watch` before testing in browser
 const $ = require('jquery')
 
 $("<button>")
+  .addClass("button-new")
   .appendTo(document.body)
-  .text("Click me!")
-  //.onclick(createGrid)
+  .text("+ Add a new grid")
+  .on("click", function() { createGrid() })
 
-createGrid(5, 5)
-createGrid(3, 2)
-
-
-
-function createGrid(mRow, nCol) {
+function createGrid() {
+  let nRow = Math.floor(Math.random() * 8) + 3
+  let nCol = Math.floor(Math.random() * 8) + 3
   let container = $("<section>")
     .appendTo(document.body)
-  for (let i = 0; i < mRow; i++) {
+  for (let i = 0; i < nRow; i++) {
     
     let r = $("<div>")
       .addClass("row")
@@ -76,6 +36,36 @@ function createGrid(mRow, nCol) {
     .addClass('deadnum')
     .appendTo(container)
 
+  $("<button>")
+    .addClass("button-dead")
+    .appendTo(container)
+    .text("Reset to dead ☠️")
+    .on("click", function() { killAll(container) })
+
+  $("<button>")
+    .addClass("button-alive")
+    .appendTo(container)
+    .text("Reset to alive 🌱")
+    .on("click", function() { resurrectAll(container) })
+
+  $("<button>")
+    .addClass("button-pattern")
+    .appendTo(container)
+    .text("Reset to pattern 🏁")
+    .on("click", function() { patternAll(container) })
+
+  $("<button>")
+    .addClass("button-new")
+    .appendTo(container)
+    .text("Repaint 🎨")
+    .on("click", function() { repaint(container, [[1,2], [2,1]]) })
+
+  $("<button>")
+    .addClass("button-new")
+    .appendTo(container)
+    .text("Log list of alive cells to console 🖨")
+    .on("click", function() { logAlive(container, nRow, nCol)})
+
   numAlive(container)
 }
 
@@ -84,7 +74,60 @@ function kill(x, y) {
     numAlive(y)
   }
 
+function killAll(y) {
+  $(y).find('.alive').removeClass('alive').addClass('dead')
+  numAlive(y)
+}
+
+function resurrectAll(y) {
+  $(y).find('.dead').removeClass('dead').addClass('alive')
+  numAlive(y)
+}
+
+function patternAll(y) {
+  $(y).find('.row:odd').find('.cell:even').removeClass('dead').addClass('alive')
+  $(y).find('.row:odd').find('.cell:odd').removeClass('alive').addClass('dead')
+  $(y).find('.row:even').find('.cell:odd').removeClass('dead').addClass('alive')
+  $(y).find('.row:even').find('.cell:even').removeClass('alive').addClass('dead')
+  numAlive(y)
+}
+
 function numAlive(y) {
     $(y).find(".alivenum").text("# of Alive Cells: " + $(y).find('.alive').length)
     $(y).find(".deadnum").text("# of Dead Cells: " + $(y).find('.dead').length)
 }
+
+function repaint(y, coordinates) {
+  killAll(y)
+  for (let i = 0; i < coordinates.length; i++) {
+    let xcoord = coordinates[i][0]
+    let ycoord = coordinates[i][1]
+    //access elements of the coordinate array to target certain cells to turn alive
+    $(y).find('.row').eq(ycoord).find('.cell').eq(xcoord).removeClass('dead').addClass('alive')
+
+    console.log("This is " + i + " coordinate")
+    console.log("X Coordinate is " + xcoord)
+    console.log("Y Coordinate is " + ycoord)
+
+  }
+}
+
+function logAlive(y, nRow, nCol) {
+  console.log("Here is a list of all the alive cells: STUB")
+  let listAlive = [];
+  for (let i = 0; i < nRow; i++) {  
+    for (let k = 0; k < nCol; k++) { //look at every cell in the grid
+      if ($(y).find('.row').eq(nRow).find('.cell').eq(nCol).is(".alive")) { //check if it's alive
+        listAlive.push([k, i]); //if it's alive, append it to the array to print
+      }
+    }
+  }
+  if (listALive.length > 0) console.log(listAlive)  //if there are elements in the array, print them
+  else console.log("There are no alive cells!") //if the array is empty, print a message saying there are no alive cells
+  // console.log(listAlive)
+  console.log("Here is how long that list should be: " + $(y).find('.alive').length) //sanity check
+
+  }
+
+
+// [x,y] x = column/nCol, y  = row/nRow

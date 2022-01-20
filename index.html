@@ -9,17 +9,11 @@
         margin: 2px;
       }
 
-      /* section {
-      } */
-
       .row {
         display: flex;
         flex-wrap: nowrap;
         flex-direction: row;
       }
-
-      section#sectionA { background: rgb(255, 68, 0) }
-      #sectionB { background: yellow }
 
       .dead {
         background-color: white;
@@ -29,15 +23,136 @@
         background-color: green;
       }
 
-      #sectionA .dead { background: grey; }
+      .deadnum {
+        background-color: white;
+        border: solid;
+        border-width: 1px;
+        margin: 2px;
+      }
+
+      .alivenum {
+        background-color: green;
+        border: solid;
+        border-width: 1px;
+        margin: 2px;
+      }
+
+      section {
+        border: solid; 
+        margin-bottom: 5px; 
+        margin-top: 5px;
+        padding: 5px;
+      }
+
+      .button-pattern {
+        background-color: #c2fbd7;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+        color: green;
+        cursor: pointer;
+        display: inline-block;
+        font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+        padding: 7px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 12px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin: 2px;
+      }
+
+      .button-pattern:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      .button-alive {
+        background-color: green;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+        padding: 7px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 12px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin: 2px;
+      }
+
+      .button-alive:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      .button-dead {
+        background-color: white;
+        border-radius: 100px;
+        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+        color: green;
+        cursor: pointer;
+        display: inline-block;
+        font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+        padding: 7px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 12px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin: 2px;
+      }
+
+      .button-dead:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      .button-new {
+        background-color: blue;
+        border-radius: 100px;
+        box-shadow: rgba(44, 120, 187, 0.2) 0 -25px 18px -14px inset,rgba(44, 120, 187, 0.15) 0 1px 2px,rgba(44, 101, 187, 0.15) 0 2px 4px,rgba(44, 108, 187, 0.15) 0 4px 8px,rgba(44, 123, 187, 0.15) 0 8px 16px,rgba(44, 120, 187, 0.15) 0 16px 32px;
+        color: white;
+        cursor: pointer;
+        display: inline-block;
+        font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+        padding: 7px 20px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 250ms;
+        border: 0;
+        font-size: 12px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin: 2px;
+      }
+
+      .button-new:hover {
+        box-shadow: rgba(44, 120, 187, 0.35) 0 -25px 18px -14px inset,rgba(44, 130, 187, 0.25) 0 1px 2px,rgba(44, 123, 187, 0.25) 0 2px 4px,rgba(44, 106, 187, 0.25) 0 4px 8px,rgba(44, 118, 187, 0.25) 0 8px 16px,rgba(44, 125, 187, 0.25) 0 16px 32px;
+        transform: scale(1.05) rotate(-1deg);
+      }
+
+      /* #sectionA .dead { background: grey; } */
 
     </style>
   </head>
   <body>
-    <section id="sectionA">
+    <!-- <section id="sectionA">
     </section>
     <section id="sectionB">
-    </section>
+    </section> -->
     <!-- <section id="alivenum"> -->
     <!-- </section> -->
     <!-- <section id="deadnum"> -->
