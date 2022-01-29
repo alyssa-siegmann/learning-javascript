@@ -2,7 +2,7 @@
 const $ = require('jquery')
 
 $("<button>")
-  .addClass("button-new")
+  .addClass("btn btn-primary px-2")
   .appendTo(document.body)
   .text("+ Add a new grid")
   .on("click", function() { createGrid() })
@@ -15,11 +15,10 @@ function createGrid() {
   for (let i = 0; i < nRow; i++) {
     
     let r = $("<div>")
-      .addClass("row")
+      .addClass("d-flex flex-nowrap flex-row")
       .appendTo(container)
     
     for (let k = 0; k < nCol; k++) {
-    
       $("<div>")
         .addClass("cell")
         .addClass(k % 2 == 0 ? "alive" : "dead")
@@ -37,34 +36,40 @@ function createGrid() {
     .appendTo(container)
 
   $("<button>")
-    .addClass("button-dead")
+    .addClass("btn btn-secondary px-2 btn-sm")
     .appendTo(container)
     .text("Reset to dead ☠️")
     .on("click", function() { killAll(container) })
 
   $("<button>")
-    .addClass("button-alive")
+    .addClass("btn btn-success px-2 btn-sm")
     .appendTo(container)
     .text("Reset to alive 🌱")
     .on("click", function() { resurrectAll(container) })
 
   $("<button>")
-    .addClass("button-pattern")
+    .addClass("btn btn-outline-success px-2 btn-sm")
     .appendTo(container)
-    .text("Reset to pattern 🏁")
+    .text("Apply pattern 🏁")
     .on("click", function() { patternAll(container) })
 
   $("<button>")
-    .addClass("button-new")
+    .addClass("btn btn-outline-success px-2 btn-sm")
     .appendTo(container)
     .text("Repaint 🎨")
     .on("click", function() { repaint(container, [[1,2], [2,1]]) })
 
   $("<button>")
-    .addClass("button-new")
+    .addClass("btn btn-outline-info px-2 btn-sm")
     .appendTo(container)
-    .text("Log list of alive cells to console 🖨")
+    .text("Log to console 🖨")
     .on("click", function() { logAlive(container, nRow, nCol)})
+
+  $("<button>")
+    .addClass("btn btn-danger btn-sm px-2")
+    .appendTo(container)
+    .text("Delete grid 🗑")
+    .on("click", function() {$(this).parent().remove();})
 
   numAlive(container)
 }
@@ -115,17 +120,18 @@ function repaint(y, coordinates) {
 function logAlive(y, nRow, nCol) {
   console.log("Here is a list of all the alive cells: STUB")
   let listAlive = [];
+  let listDead = [];
+
   for (let i = 0; i < nRow; i++) {  
-    for (let k = 0; k < nCol; k++) { //look at every cell in the grid
-      if ($(y).find('.row').eq(nRow).find('.cell').eq(nCol).is(".alive")) { //check if it's alive
-        listAlive.push([k, i]); //if it's alive, append it to the array to print
-      }
+    for (let k = 0; k < nCol; k++) {
+      if ($(y).find('.row').eq(i).find('.cell').eq(k).is('.alive')) {
+        listAlive.push([k, i]);
+      } else {listDead.push([k, i]);}
     }
   }
-  if (listALive.length > 0) console.log(listAlive)  //if there are elements in the array, print them
-  else console.log("There are no alive cells!") //if the array is empty, print a message saying there are no alive cells
-  // console.log(listAlive)
-  console.log("Here is how long that list should be: " + $(y).find('.alive').length) //sanity check
+  console.log(listAlive)
+  console.log(listDead)
+  console.log("Here is how long that list SHOULD be: " + $(y).find('.alive').length) //sanity check
 
   }
 
