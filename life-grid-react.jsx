@@ -3,13 +3,25 @@ const ReactDOM = require('react-dom')
 
 const myArray = [1, 2, 3, 4, 5]
 
+const myRow = Array.from(Array(Math.floor(Math.random() * 8) + 3).keys())
+const myCol = Array.from(Array(Math.floor(Math.random() * 8) + 3).keys())
+// const myRow = [...Array(Math.floor(Math.random() * 8) + 3)]
+// const myCol = [...Array(Math.floor(Math.random() * 8) + 3)]
+// const myRow = [...Array(5)]
+// const myCol = [...Array(10)]
+
+
 class App extends React.Component {
-  state = { count: 0 }
+  state = { 
+    count: 0,
+    liveCells: [[1,1], [2,3], [4,2]] 
+    // how can I console.log the state?
+  }
 
   render() {
     return (
-      <div class='text-primary'>
-        <div class='my-4'>
+      <div className='text-primary'>
+        {/* <div className='my-4'>
           <Hello count={this.state.count} onReset={() => this.setState({ count: 0 })}></Hello>
           <Hello count={this.state.count + 5}></Hello>
           <Hello count={this.state.count + 6}></Hello>
@@ -19,9 +31,18 @@ class App extends React.Component {
         </div>
         <button onClick={() => this.setState({ count: this.state.count + 1 })}>
           Click me, pleaseeee!
-        </button>
-        {myArray.map(i => <div>{i}</div>)}
-        {myArray.map(i => <div class='cell'>{i}</div>)}
+        </button> */}
+        {/* {myArray.map(i => <div>{i}</div>)} */}
+
+        {/* hw starts here */}
+        {myRow.map(i => <div className='row row-cols-auto' key={i.toString()}>
+            {myCol.map(j => <div className='col cell' key={j.toString()} onClick={() => {this.setState({ liveCells: this.state.liveCells.push([i,j])}); console.log(this.state.liveCells)}}></div>)}
+            {/* this only works for the first cell clicked, according to console log */}
+          </div>)}
+        
+        
+
+    
       </div>
     )
 
