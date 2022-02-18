@@ -8,7 +8,7 @@ $("<button>")
   .text("+ Add a new grid")
   .on("click", function() { createGrid() })
 
-// Function that creates a new grid with ranndom # of rows and columns
+// Function that creates a new grid with random # of rows and columns
 function createGrid() {
   // generate random # of rows and columnns
   let nRow = Math.floor(Math.random() * 8) + 3
