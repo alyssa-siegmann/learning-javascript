@@ -1,3 +1,8 @@
+// don't forget to run 
+// npx esbuild life-grid-react.jsx --outfile=bundle.js --bundle --watch
+// before testing in browser
+
+
 const React = require('react')
 const ReactDOM = require('react-dom')
 
@@ -5,22 +10,27 @@ const myArray = [1, 2, 3, 4, 5]
 
 const myRow = Array.from(Array(Math.floor(Math.random() * 8) + 3).keys())
 const myCol = Array.from(Array(Math.floor(Math.random() * 8) + 3).keys())
+
+const cellInArray = (array, x, y) => array.some((element) => element[0] === x && element[1] === y);
+
 // const myRow = [...Array(Math.floor(Math.random() * 8) + 3)]
 // const myCol = [...Array(Math.floor(Math.random() * 8) + 3)]
 // const myRow = [...Array(5)]
 // const myCol = [...Array(10)]
 
+function f() {
+  return 5
+}
 
 class App extends React.Component {
   state = { 
     count: 0,
     liveCells: [[1,1], [2,3], [4,2]] 
-    // how can I console.log the state?
   }
 
   render() {
     return (
-      <div className='text-primary'>
+      <div className='text-primary p-4'>
         {/* <div className='my-4'>
           <Hello count={this.state.count} onReset={() => this.setState({ count: 0 })}></Hello>
           <Hello count={this.state.count + 5}></Hello>
@@ -35,13 +45,23 @@ class App extends React.Component {
         {/* {myArray.map(i => <div>{i}</div>)} */}
 
         {/* hw starts here */}
-        {myRow.map(i => <div className='row row-cols-auto' key={i.toString()}>
-            {myCol.map(j => <div className='col cell' key={j.toString()} onClick={() => {this.setState({ liveCells: this.state.liveCells.push([i,j])}); console.log(this.state.liveCells)}}></div>)}
+        {myRow.map(i => 
+          <div 
+            className='row row-cols-auto'
+            key={i}
+          >
+            {myCol.map(j => 
+              <div 
+                className={cellInArray(this.state.liveCells, i, j) ? "col cell alive" : "col cell dead"} 
+                key={j} 
+                onClick={() => {var newCells = [...this.state.liveCells, [i,j]]; this.setState({ liveCells: newCells }); console.log(newCells)}}>
+              </div>
+            )}
+            {"{"}
             {/* this only works for the first cell clicked, according to console log */}
+            {/* how might I add an if statement here to check if it's in livecells? */}
           </div>)}
         
-        
-
     
       </div>
     )
@@ -74,6 +94,6 @@ class Hello extends React.Component {
 }
 
 ReactDOM.render(
-  React.createElement(App),
+  <App width={12} height={10} />,
   document.getElementById("app")
 )
