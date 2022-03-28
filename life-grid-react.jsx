@@ -18,9 +18,10 @@ const cellInArray = (array, x, y) => array.some((element) => element[0] === x &&
 // const myRow = [...Array(5)]
 // const myCol = [...Array(10)]
 
-function f() {
-  return 5
-}
+// function f() {
+//   return 5
+// }
+
 
 class App extends React.Component {
   state = { 
@@ -30,21 +31,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='text-primary p-4'>
-        {/* <div className='my-4'>
-          <Hello count={this.state.count} onReset={() => this.setState({ count: 0 })}></Hello>
-          <Hello count={this.state.count + 5}></Hello>
-          <Hello count={this.state.count + 6}></Hello>
-          <Hello count={this.state.count + 7}></Hello>
-          <Hello count={this.state.count - 10}></Hello>
-          {this.state.count > 5 ? <div className="text-success">Whu?</div> : <div className="text-info">Ha!</div>}
-        </div>
-        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
-          Click me, pleaseeee!
-        </button> */}
-        {/* {myArray.map(i => <div>{i}</div>)} */}
-
-        {/* hw starts here */}
+      <div className='text-primary p-4'> Here is a board for you:
         {myRow.map(i => 
           <div 
             className='row row-cols-auto'
@@ -52,18 +39,60 @@ class App extends React.Component {
           >
             {myCol.map(j => 
               <div 
-                className={cellInArray(this.state.liveCells, i, j) ? "col cell alive" : "col cell dead"} 
+                className={cellInArray(this.state.liveCells, i, j) ? "col cell alive" : "col cell dead"}
                 key={j} 
-                onClick={() => {var newCells = [...this.state.liveCells, [i,j]]; this.setState({ liveCells: newCells }); console.log(newCells)}}>
+                onClick={() => 
+                  {var newCells = cellInArray(this.state.liveCells, i, j) ? 
+                    // KNOWN BUG in line below becuase of the "not && not" condition - it removes everything with the same x OR y
+                    this.state.liveCells.filter(cell => cell[0] !== i && cell[1] !== j) :
+                    [...this.state.liveCells, [i,j]];
+                  this.setState({ liveCells: newCells }); 
+                  console.log(newCells);}}
+              >
               </div>
             )}
-            {"{"}
-            {/* this only works for the first cell clicked, according to console log */}
-            {/* how might I add an if statement here to check if it's in livecells? */}
           </div>)}
-        
     
+          <div className='btn btn-secondary px-2 m-1 btn-sm'
+            onClick = {() => 
+              {var newCells = [];
+              this.setState({ liveCells: newCells }); 
+              console.log(newCells);}}
+          > Reset to dead ☠️
+          </div>
+
+          <div className='btn btn-secondary px-2 m-1 btn-sm'
+            onClick = {() => 
+              {var newCells = [[0,0]];
+              myCol.map(i => myRow.map(j => [...newCells, [i,j]]));
+                // THIS IS WRONG -- I NEED TO FIGURE OUT HOW TO CREATE AN ARRAY WITH ALL CELLS. ARRAY CONSTRUCTION SYNTAX PROBABLY WRONG. MAPPING MIGHT BE WRONG. Using [0,0] as a stub.
+              this.setState({ liveCells: newCells }); 
+              console.log(newCells);}}
+          > 🚧 set all to alive WIP 🚧
+          </div>
+
+          <div className='btn btn-secondary px-2 m-1 btn-sm'
+            onClick = {() => 
+              {var newCells = myCol.map(i => i % 2 == 0 ? myRow.map(j => j % 2 == 1 ? Array([i, j]) : nothing) : myRow.map(j => j % 2 == 0 ? Array([i, j]) : noting ));
+              // AGAIN, THIS IS A BUG AND DOESN'T WORK -- NEED TO FIGURE OUT HOW TO GET AN ARRAY OF CHECKERED CELLS. I KNOW I'M NOT CONSTRUCTING THE ARRAY CORRECTLY AND MY MAP AS LOOP MIGHT NOT BE SET UP RIGHT
+                this.setState({ liveCells: newCells }); 
+              console.log(newCells);}}
+          > 🚧 checker the grid WIP 🚧
+          </div>
+
+          <div className='btn btn-secondary px-2 m-1 btn-sm'> 🚧 swap daed and alive WIP 🚧
+          {/* STUB - need to add onclick function -- maybe try something like.... newCells = AllCells.filter OUT liveCells, liveCells: newCells*/}
+          </div>
+
+          <div className='btn btn-secondary px-2 m-1 btn-sm'
+            onClick = {() => 
+              {var newCells = [[1,2], [2,1]];
+              this.setState({ liveCells: newCells }); 
+              console.log(newCells);}}
+          > Repaint 🎨
+          </div>
       </div>
+      
     )
 
     // React.createElement(
