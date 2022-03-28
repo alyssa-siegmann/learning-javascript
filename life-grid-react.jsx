@@ -61,26 +61,26 @@ class App extends React.Component {
           > Reset to dead ☠️
           </div>
 
-          <div className='btn btn-secondary px-2 m-1 btn-sm'
+          <div className='btn btn-warning px-2 m-1 btn-sm'
             onClick = {() => 
               {var newCells = [[0,0]];
               myCol.map(i => myRow.map(j => [...newCells, [i,j]]));
                 // THIS IS WRONG -- I NEED TO FIGURE OUT HOW TO CREATE AN ARRAY WITH ALL CELLS. ARRAY CONSTRUCTION SYNTAX PROBABLY WRONG. MAPPING MIGHT BE WRONG. Using [0,0] as a stub.
               this.setState({ liveCells: newCells }); 
               console.log(newCells);}}
-          > 🚧 set all to alive WIP 🚧
+          > 🛠set all to alive WIP 🛠
           </div>
 
-          <div className='btn btn-secondary px-2 m-1 btn-sm'
+          <div className='btn btn-warning px-2 m-1 btn-sm'
             onClick = {() => 
               {var newCells = myCol.map(i => i % 2 == 0 ? myRow.map(j => j % 2 == 1 ? Array([i, j]) : nothing) : myRow.map(j => j % 2 == 0 ? Array([i, j]) : noting ));
               // AGAIN, THIS IS A BUG AND DOESN'T WORK -- NEED TO FIGURE OUT HOW TO GET AN ARRAY OF CHECKERED CELLS. I KNOW I'M NOT CONSTRUCTING THE ARRAY CORRECTLY AND MY MAP AS LOOP MIGHT NOT BE SET UP RIGHT
                 this.setState({ liveCells: newCells }); 
               console.log(newCells);}}
-          > 🚧 checker the grid WIP 🚧
+          > 🛠checker the grid WIP 🛠
           </div>
 
-          <div className='btn btn-secondary px-2 m-1 btn-sm'> 🚧 swap daed and alive WIP 🚧
+          <div className='btn btn-warning px-2 m-1 btn-sm'> 🛠 swap dead and alive WIP 🛠
           {/* STUB - need to add onclick function -- maybe try something like.... newCells = AllCells.filter OUT liveCells, liveCells: newCells*/}
           </div>
 
